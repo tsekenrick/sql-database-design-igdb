@@ -17,9 +17,7 @@ CREATE TABLE game (
 );
 ```
 
----
-
-The index field is sort of a holdover from importing the DataFrame as a .csv, and really just represented the number of the row entry. Given that, the choice of representing as an `integer` is rather self explanatory. It has no real relation to any of the data, so this will probably get dropped once we import the data. I considered using this as an artificial PK, but decided that since the game title should be unique to each entry, that would make for a more meaningful PK.
+The index field is sort of a holdover from importing the DataFrame as a .csv, and really just represented the number of the row entry. Given that, the choice of representing as an `integer` is rather self explanatory. It has no real relation to any of the data. I considered using this as an artificial PK, but decided that since the game title should be unique to each entry, that would make for a more meaningful PK.
 
 ---
 
@@ -104,8 +102,8 @@ Indexes:
 
 # Query Results
 
-```
 ### 1. the total number of rows in the database
+```
 
 count
 -------
@@ -114,8 +112,8 @@ count
 
 ---
 
-```
 ### 2. show the first 15 rows, but only display 3 columns (your choice)
+```
 
                title                | esrb | aggregate_rating
 ------------------------------------+------+------------------
@@ -138,8 +136,8 @@ count
 
 ---
 
-```
 ### 3. do the same as above, but chose a column to sort on, and sort in descending order
+```
 
                 title                 | esrb | aggregate_rating
 --------------------------------------+------+------------------
@@ -163,8 +161,8 @@ count
 
 ---
 
-```
 ### 4. add a new column without a default value
+```
 
 homework04=# ALTER TABLE game
 homework04-#   ADD COLUMN esrb_string varchar(20);
@@ -174,8 +172,8 @@ ALTER TABLE
 
 ---
 
-```
 ### 5. set the value of that new column
+```
 
 homework04=# UPDATE game SET esrb_string = esrb::varchar(20);
 UPDATE 1275
@@ -217,8 +215,8 @@ homework04=# select title, esrb, esrb_string from game limit 15;
 
 ---
 
-```
 ### 6. show only the unique (non duplicates) of a column of your choice
+```
 
   esrb_string
 ----------------
@@ -233,8 +231,8 @@ homework04=# select title, esrb, esrb_string from game limit 15;
 
 ---
 
-```
 ### 7. group rows together by a column value (your choice) and use an aggregate function to calculate something about that group
+```
 
   esrb_string   | titles_of_rating
 ----------------+------------------
@@ -249,8 +247,8 @@ homework04=# select title, esrb, esrb_string from game limit 15;
 
 ---
 
-```
 ### 8. now, using the same grouping query or creating another one, find a way to filter the query results based on the values for the groups
+```
 
  esrb_string  | titles_of_rating
 --------------+------------------
@@ -261,9 +259,10 @@ homework04=# select title, esrb, esrb_string from game limit 15;
 
 ```
 
+---
 
-```
 ### 9. states the number of games of each esrb rating that have an aggregate rating greater than 70
+```
 
   esrb_string   | titles_of_rating
 ----------------+------------------
@@ -276,8 +275,10 @@ homework04=# select title, esrb, esrb_string from game limit 15;
 
 ```
 
-```
+---
+
 ### 10. states the average aggregate rating for games from each of the esrb ratings
+```
 
   esrb_string   |     rating_avg
 ----------------+---------------------
@@ -292,8 +293,8 @@ homework04=# select title, esrb, esrb_string from game limit 15;
 
 ---
 
-```
 ### 11. add best_of_rating boolean as a new column that states whether the title has a better aggregate rating than the average for that esrb rating
+```
 
               title               | aggregate_rating | best_of_rating
 ----------------------------------+------------------+----------------
@@ -322,8 +323,8 @@ homework04=# select title, esrb, esrb_string from game limit 15;
 
 ---
 
-```
 ### 12. personal interest - looking at the performance of the "Warriors" series games - a hack and slash franchise that I played a lot growing up and has a lot of sentimental value for me (even though I know the games are trash)
+```
 
  index |               title                | esrb | aggregate_rating | esrb_string  | best_of_rating
 -------+------------------------------------+------+------------------+--------------+----------------
